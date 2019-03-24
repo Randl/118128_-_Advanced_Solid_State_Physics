@@ -1,0 +1,140 @@
+\section{Introduction}
+The simplest Hamiltonian is, denoting electrons with $i$ and ions with $I$: 
+\begin{align}
+H = \sum_i \frac{\vb{P}_i^2}{2m_e} +  \sum_I \frac{\vb{P}_I^2}{2m_I} +  \sum_{i,I} \frac{e^2Z}{\abs{\vb{r}_i - \vb{R}_i}} +  \sum_{i,j} \frac{e^2}{\abs{\vb{r}_i - \vb{r}_j}}+  \sum_{I,J} \frac{e^2Z^2}{\abs{\vb{R}_i - \vb{R}_j}}
+\end{align}
+The last part of Hamiltonian is many-body interaction, which makes it complex, due to big amount of degrees of freedom. 
+
+We neglect here relativistic (spin-orbit) and radioactive corrections. We'll add electromagnetic field interaction later.
+
+We note that $\frac{m_e}{m_I} \lesssim 10^3$, and perform Born-Oppenheimer approximation: neglecting ion movement (frozen ions). Yet electron-electron interactions is many-body problem:
+
+\begin{align}
+H^{el} = \sum_i \frac{\vb{P}_i^2}{2m_e} +  \sum_i V\qty(\vb{r}_i) + \sum_{i,j} \frac{e^2}{\abs{\vb{r}_i - \vb{r}_j}}
+\end{align}
+
+The problem is still pretty complex one. If we have 200 one-particle states and we put 100 particles in the system. In case of fermions there are $\binom{200}{100}$ possible states and and for bosons $\binom{200+100-1}{100}$.
+
+There are phenomena that happen only in large scale: spontaneously broken symmetry, critical phenomena, scale invariance.
+
+\paragraph{organizing principle}
+\begin{enumerate}
+	\item Symmetry: $\mathbb{Z}_2, O(2), O(3)$
+	\item Statistics of particles (Fermi or Bose statistics)
+	\item Range of interactions.
+	\item Gauge fields. 
+	\item Thermal and quantum fluctuations.
+	\item Topological invariants.
+\end{enumerate}
+
+\paragraph{Particles in the box}
+\begin{align}
+H = \sum_i \frac{\vb{P}_i^2}{2m_e}
+\end{align}
+
+We use periodic boundary conditions (PBC) and then single-particle eigenfucntions are plane waves:
+\begin{align}
+\epsilon_{\vb{k}} &= \frac{\hbar \vb{k}^2}{2m}\\
+\braket{\vb{x}}{\vb{k}} &= \frac{1}{\sqrt{V}} e^{i \vb{k} \vdot \vb{x}}
+\end{align}
+Wavenumbers are thus quantized as $k_i = \frac{2\pi}{L_i}n_i$
+
+\paragraph{Density of states}
+We define density of states:
+\begin{align}
+\mathcal{N}(\epsilon) = \frac{1}{V}\sum_{\vb{k}} \tilde{\delta}\qty(\epsilon - \epsilon_{\vb{k}})
+\end{align}
+$\tilde{\delta}$ approximates delta function with some function wider than distance between two allowed energies.
+Switching to integral:
+
+\begin{align}
+\mathcal{N}^{3D}(\epsilon) = 2\cdot \int \frac{\dd[3]{k}}{(2\pi)^3} \delta(\epsilon - \epsilon_{\vb{k}}) &= \frac{m}{\hbar^3 \pi^2} \sqrt{2m \epsilon}\\
+\mathcal{N}^{2D}(\epsilon) &= \frac{m}{n}\\
+\mathcal{N}^{1D}(\epsilon) &= \frac{1}{\sqrt{\epsilon}}
+\end{align}
+
+\begin{theorem}[Bloch theorem]
+	Eigenfunction of periodic Hamiltonian are plane waves times periodic function.
+\begin{proof}
+	Take a look on a single particle Hamiltonian:
+	\begin{align}
+	H = \frac{\vb{p}^2}{2m} + V^{eff} (\vb{r})
+	\end{align}
+	If $V^{eff}(\vb{r}) = V^{eff}(\vb{R} + \vb{R}_n)$ for $\vb{R}_n$ lattice vector, then Hamiltonian is symmetric under translations:
+	\begin{align}
+	T^\dagger(\vb{R}_n) H T(\vb{R}_n) = H
+	\end{align}
+	$T$ defines Abelian group, and thus $T$ is unitary operator. Since $T$ commutes with $H$, we can diagonalize $H$ and $T$ simultaneously:
+	\begin{align}
+	T(\vb{R}_n) \ket{\psi_\alpha} &= e^{i \phi(\vb{R}_n, \alpha)} \ket{\psi_\alpha}\\
+	H \ket{\psi_\alpha} &= \epsilon_\alpha \ket{\psi_\alpha}\
+	\end{align}
+	By looking on two consequent translations, we find out $\phi$ is linear:
+	\begin{align}
+	T(\vb{R}_1)T(\vb{R}_2) \ket{\psi_\alpha} &= e^{i \phi_\alpha(\vb{R}_1)}e^{i \phi_\alpha(\vb{R}_2)} \ket{\psi_\alpha}\\
+	\phi_\alpha(\vb{R}_1 + \vb{R}_2) &=\phi_\alpha(\vb{R}_1) + \phi_\alpha(\vb{R}_2)
+	\end{align}
+	Thus 
+	\begin{align}
+	\phi_\alpha(\vb{R}) = \vb{K}_\alpha \vdot \vb{R}
+	\end{align}
+	
+	From PBC we get
+	\begin{align}
+	K_i \cdot L_i = 2\pi n_i 
+	\end{align}
+	Since eigenfunctions of Hamiltonian are eigenfunctions of $T$, we conclude that 
+	\begin{align}
+	\psi_k(\vb{r}) = e^{i \vb{k} \vdot \vb{r}} \mathcal{U}(\vb{r})
+	\end{align}
+	for $\mathcal{U}(\vb{r}) = \mathcal{U}(\vb{r}+\vb{R})$.
+\end{proof}
+\end{theorem}
+
+$\vb{k}$ are limited in their value by first Brillouin zone. We can rewrite Hamiltonian:
+\begin{align}
+H = \sum_{\vb{k}, \alpha} \epsilon_{\vb{k}, \alpha} \dyad{\psi_k^\alpha}
+\end{align}
+
+If $V$ has additional symmetries, for example, reflection symmetry, energies have same symmetries:
+\begin{align}
+R^{-1} V(\vb{R}) R = V(\vb{r}) \Rightarrow \epsilon_{\vb{k}} =  \epsilon_{R(\vb{k})}
+\end{align}
+
+While $\mathcal{U}$ determines short-term behavior of particles, $e^{i \vb{k} \vdot \vb{r}}$ governs long-term behavior.
+
+\section{Tight binding model}
+We are looking on bands of energies in a single Brillouin zone, especially interested in conductance band (one intersected by Fermi energy).
+
+In tight-binding we rewrite Hamiltonian as nearest neighbor model:
+ \begin{align}
+ H = -\frac{t}{2} \sum_{\vb{R}} \dyad{\vb{R}}{\vb{R}+\vb{\eta}} + h.c.
+ \end{align}
+, where $\ket{\vb{R}}$ are local states such that $\braket{\vb{R}}{\vb{R}'} = \delta_{\vb{R},\vb{R}'}$.
+
+\paragraph{Lattice Fourier transform}
+In 1D, $\vb{R}_j = \vb{a}\cdot j$. Define 
+\begin{align}
+\vb{k} = \underbrace{\frac{1}{\sqrt{N}} \sum_j e^{ikaj}}_{U_{\vb{k}}} \ket{\vb{R}_j}
+\end{align}
+$U_{\vb{k}}$ is unitary matrix:
+\begin{align}
+\mel{j}{U^\dagger_{\vb{k}}U_{\vb{k}}}{j'} = \frac{1}{N} \sum_{j,j'} e^{-ikaj}e^{ikaj'} = \frac{1}{N} \sum_{j,j'} e^{-ika(j-j')} = \delta_{jj'}
+\end{align}
+
+Now
+\begin{align}
+\epsilon_{\vb{k}} =\mel{\vb{k}}{H}{\vb{k}} = -\frac{t}{N} \sum_{\vb{R}'} \sum_{\vb{R}, \vb{\eta}} e^{i \vb{k} \vdot \vb{R} } \bra{\vb{R}'}\dyad{\vb{R}}{\vb{R}+\vb{\eta}} e^{-i \vb{k} \vdot \vb{R}} = -\frac{1}{N} \sum_{\vb{R}, \vb{\eta}} e^{i\vb{k} \vdot \qty(\vb{R} - \vb{R} + \vb{\eta})} = -t \underbrace{\sum_{\vb{\eta}} e^{i \vb{k} \vdot \vb{\eta}} }_{\gamma_{\vb{k}}^{(\eta)}}
+\end{align}
+
+\paragraph{Examples}
+\subparagraph{1D}
+\begin{align}
+\epsilon_{\vb{k}} = -2t \cos(ka)
+\end{align}
+\subparagraph{2D}
+\begin{align}
+\epsilon_{\vb{k}} = -2t \qty\big[\cos(k_x a)+\cos(k_y a)]
+\end{align}
+
+\subsection{Wannier States}

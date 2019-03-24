@@ -1,0 +1,77 @@
+\paragraph{Reminder}
+For lattice vectors $\vb{r}_i$, reciprocal lattice vectors are $\vb{k}_i = \frac{2\pi}{V} \cdot \qty(\vb{r}_j \cross \vb{r}_k)$.
+
+\begin{definition}[Wannier states]
+	Wannier states are lattice Fourier transform of Bloch wave.
+	\begin{align}
+	W^\alpha_n(\vb{r}) = \frac{1}{N} \sum_{\vb{k}} e^{-i \vb{k} \vdot \vb{R}_n} \psi_{\vb{k}} (\vb{r}) = \frac{1}{N} \sum_{\vb{k}} e^{-i \vb{k} \vdot \vb{R}_n} e^{i\vb{k} \vdot (\vb{r}-\vb{R}_n)}\mathcal{U}_{\vb{k}} (\vb{r}-\vb{R}_n) = W^\alpha (\vb{r}-\vb{R}_n)
+	\end{align}
+\end{definition}
+
+\begin{prop}
+	$W^\alpha_n$ are orthogonal.
+	\begin{proof}
+		\begin{align}
+		\int \dd{\vb{r}} W^\alpha_n(\vb{r}) W^\beta_{n'}(\vb{r}) = \frac{1}{N^2} \sum_{\vb{k}, \vb{k}'} e^{i\qty(\vb{k} \vdot \vb{R}_n - \vb{k}' \vdot \vb{R}_{n'})} \int \dd{\vb{r}} {\psi^{\alpha}_{\vb{k}}}^* (\vb{r}) \psi^{\beta}_{\vb{k}'} (\vb{r}) = \frac{1}{N} \sum_{\vb{k}} e^{i \vb{k}(\vb{R}_n - \vb{R}_{n'})} =\delta_{nn'} \delta_{\alpha \beta}
+		\end{align}
+	\end{proof}
+\end{prop}
+
+How local are $W^\alpha$?
+\begin{align}
+W(\vb{r}) = \int \frac{\dd{\vb{k}}}{(2\pi)^3} e^{i\vb{k} \vdot \vb{r}} \mathcal{U}_{\vb{k}}(\vb{r})
+\end{align}
+Looking for a maximum of $\mathcal{U}_{\vb{k}}(\vb{r})$, we apply logarithm $f(\vb{r}) = \log(\mathcal{U}_{\vb{k}}(\vb{r}))$ and Taylor expand it:
+
+\begin{align}
+W(\vb{r}) = \int \frac{\dd{\vb{k}}}{(2\pi)^3} e^{i\vb{k} \vdot \vb{r}} \mathcal{U}_{\vb{k}_0}(\vb{r}_0) \exp(-\frac{1}{2} \pdv{\vb{k}} f_{\vb{k}_0} (\vb{r}_0) (\vb{k} - \vb{k}_0)^2 -\frac{1}{2} \pdv{\vb{r}} f_{\vb{k}_0} (\vb{r}_0) (\vb{r} - \vb{r}_0)^2)
+\end{align}
+Denote $\pdv{\vb{k}} f_{\vb{k}_0}  = a^2$, taking $R_n$ large enough and thus neglecting $\vb{r}$ derivative since $(\vb{r} - \vb{r}_0)^2$ is small we get:
+
+\begin{align}
+W(\vb{R}_n-\vb{r}_0) = \int \frac{\dd{\vb{k}}}{(2\pi)^3} e^{i\vb{k} \vdot \vb{R}_n} e^{-\frac{1}{2} a^2 (\vb{r}_0) (\vb{k} - \vb{k}_0)^2 } \sim e^{- \frac{\vb{R}_n^2}{2a^2}}
+ \end{align}
+ 
+ Thus
+ \begin{align}
+ W(\vb{r}-\vb{R}_n)  \sim e^{- \frac{(\vb{r}-\vb{R}_n)^2}{a^2}}
+ \end{align}
+ 
+If $\mathcal{U}_{\vb{k}}(\vb{r}_0)$ varies slowly with $\vb{k}$, Wannier states are localized. In an extreme case of 
+$\mathcal{U}_{\vb{k}}^\alpha = \phi^\alpha(\vb{r})$:
+
+\begin{align}
+W_\alpha (\vb{r}- \vb{R}_n) = \int \dd{k} e^{i \vb{k}(\vb{r}-\vb{R}_n)} \phi_\alpha(\vb{r}-\vb{R}_n) = \delta(\vb{r} -\vb{R}_n)\phi_\alpha(\vb{r} -\vb{R}_n)
+\end{align}
+
+If $\mathcal{U}_{\vb{k}}$ is singular function of $\vb{k}$ we get
+\begin{align}
+W(\vb{r}-\vb{R}_n) \sim \frac{1}{(\vb{r}-\vb{R}_n)^\gamma}
+\end{align}
+
+\subsection{Tight-binding}
+Tight-binding is good when there is a single band and Wannier function is slowly varying (at a momentum scale of Bruilien zone). 
+We can write the Hamiltonian as
+\begin{align}
+H  = \frac{P^2}{2m_e} + V_{eff}(\vb{r}) =  \frac{P^2}{2m_e} + \sum_n V_{atom}(\vb{r}-\vb{R}_n) + \Delta V(\vb{r} - \vb{R}_n)
+\end{align}
+where $\Delta V$ is difference between atomic and lattice potentials. If wavefunctions are localized around nuclei the effect of $\Delta V$ is small.
+
+We'll use anzatz of sum of local states:
+\begin{align}
+\tilde{\psi}_\alpha (\vb{r}) = \sum_{\vb{R}_n} e^{-i \vb{k} \vdot \vb{R}_n}\phi^\alpha (\vb{r}-\vb{R}_n)
+\end{align}
+
+Those wavefunctions are not eigenstates, but approximate them. We get
+\begin{align}
+\braket{\tilde{\psi}}{\tilde{\psi}'} = \int \dd{\vb{r}} \sum_{\vb{R}_n, \vb{R}_{n'}} e^{i \vb{k}\vdot \vb{R}_n}e^{-i \vb{k}'\vdot \vb{R}_{n'}}  {\phi}^* (\vb{r}-\vb{R}_n) \phi (\vb{r}-\vb{R}_n') 
+	\end{align}
+Defining $\alpha(\vb{R}_n - \vb{R}_{n'}) = \int \dd{\vb{r}} \ {\phi^\alpha}^* (\vb{r}-\vb{R}_n) \phi^\alpha (\vb{r}-\vb{R}_n') $ we get
+\begin{align}
+\braket{\tilde{\psi}}{\tilde{\psi}'} = \sum_{\vb{R}_n, \vb{R}_{n'} }  e^{i \vb{k}\vdot \vb{R}_n} e^{-i \vb{k}'\vdot \vb{R}_{n'}} \alpha(\vb{R}_n-\vb{R}_{n'}) = \sum_{\vb{R}_n} e^{i(\vb{k}-\vb{k}')\vb{R}_n}\sum_{\vb{R}_{n'}} e^{i(\vb{k}-\vb{k}')\vb{R}_{n'}} \alpha(\vb{R}_n-\vb{R}_{n'}) 
+\end{align}
+\begin{align}\bar{\alpha}(\vb{k}) = \sum_{\vb{R}_{n'}} e^{i(\vb{k}-\vb{k}')\vb{R}_{n'}} \alpha(\vb{R}_n-\vb{R}_{n'}) = 1 + \sum_{\vb{R}_{n'} \neq 0} e^{i\vb{k} \vdot \vb{R}_n} \alpha(\vb{R}_{n'}) = 1 + \tilde{\alpha}(\vb{k})\end{align}
+And thus
+\begin{align}\braket{\tilde{\psi}}{\tilde{\psi}'} = \delta_{\vb{k}\vb{k}'} \bar{\alpha}(\vb{k})\end{align}
+Thus we can normalize and acquire orthonormal states:
+\begin{align}\ket{\tilde{\psi}_{norm}} = \frac{1}{\sqrt{1+\tilde{\alpha}(\vb{k})}} \ket{\tilde{\psi}}\end{align}

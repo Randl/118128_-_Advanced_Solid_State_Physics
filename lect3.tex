@@ -1,0 +1,126 @@
+
+\begin{align}
+\tilde{\epsilon}_{\vb{k}} = \expval{H}{\tilde{\psi}_{\vb{k}}} = \frac{1}{1+\tilde{\alpha}(\vb{k})}  \sum_{n,n'} \int \dd{\vb{r}} e^{i\vb{k} \vdot \qty(\vb{R}_n-\vb{R}_{n'})} \phi^*_{atom} (\vb{r}-\vb{R}_n) \qty[\underbrace{-\frac{-\laplacian}{2m} +V_{atom}(\vb{r})}_{\epsilon_{atom}} + \Delta V(\vb{r}) ] \phi_{atom} (\vb{r}-\vb{R}_n) =\\= \frac{1}{1+\tilde{\alpha}(\vb{k})} \epsilon_{atom} \underbrace{\sum_{n,n'} \int \dd{\vb{r}} e^{i\vb{k} \vdot \qty(\vb{R}_n-\vb{R}_{n'})} \phi^*_{atom} (\vb{r}-\vb{R}_n) \phi_{atom} (\vb{r}-\vb{R}_n)}_{1+\tilde{\alpha}(\vb{k})} +\\+ \frac{1}{1+\tilde{\alpha}(\vb{k})}  \sum_{n,n'} \int \dd{\vb{r}} e^{i\vb{k} \vdot \qty(\vb{R}_n-\vb{R}_{n'})} \phi^*_{atom} (\vb{r}-\vb{R}_n) \Delta V(\vb{r})  \phi_{atom} (\vb{r}-\vb{R}_n) 
+\end{align}
+We denote
+\begin{align}
+t(\vb{k}) = -\sum_{n} \int \dd{\vb{r}} e^{i\vb{k} \vdot \vb{R}_n} \phi^*_{atom} (\vb{r}-\vb{R}_n) \Delta V(\vb{r})  \phi_{atom} (\vb{r}-\vb{R}_n) 
+\end{align}
+and  thus
+\begin{align}
+\tilde{\epsilon}_{\vb{k}} = \epsilon_{atom}- \frac{t(\vb{k})}{1+\tilde{\alpha}(\vb{k})}  
+\end{align}
+In a limit of small characteristic atomic length $\frac{l_{atom}}{a} \ll 1$, we get
+\begin{align}
+\tilde{\alpha}(\vb{k}) \sim \exp(-\qty(\frac{na}{l_{atom}})^2)
+\end{align}
+i.e.,
+\begin{align}
+\tilde{\epsilon}_{\vb{k}} \sim \epsilon_{atom}- t(\vb{k})  
+\end{align}
+For the same reason, due to exponential decay, we can neglect long-distance hopping.
+
+
+
+We now take Wannier states of those $\tilde{\psi}_{norm}$:
+\begin{align}W(\vb{r} -\vb{R}_n) \simeq \phi_{atom}(\vb{r}-\vb{R}_n) = \sum_{\vb{k}} e^{i\vb{k} \vdot \vb{R}_n} \tilde{\psi}_{norm}(\vb{r})
+	\end{align}
+We denote $\ket{n} = W_n(\vb{r})$. Those states diagonalize Hamiltonian:
+\begin{align}
+H = \sum_n\epsilon_{atom}\dyad{n} - \sum_{n,n'} t_{nn'} \dyad{n}{n'} + h.c.
+\end{align}
+
+The approximation is broken if, for example two bands are touching each other. Then we can describe two bands together as a single tight-binded band.
+
+\section{Semi-classical dynamics}
+First we require $k_BT \sim \hbar \omega \ll \Delta E$, where $\Delta E$ is energy difference between two bands.
+
+If we also require long wavelength $\lambda \gg a$, we get a wavepacket of width $\Delta k$ and center in $\vb{k}_0$:
+\begin{align}
+W(\vb{r}) = \int \dd{\vb{k}} e^{i\vb{k}\vdot \qty(\vb{r}-\vb{r}_0)}e^{-\frac{(\vb{k}-\vb{k}_0)^2}{\qty(\Delta k)^2}}\sim e^{(\Delta k)^2(\vb{r}-\vb{r}_0)^2}
+\end{align}
+Thus, using our solution of the Shr\"{o}dinger equation and expanding to the first order (denoting $\vb{k} - \vb{k}_0 = \delta \vb{k}$:
+\begin{align}
+W(\vb{r}, t) &= \int \dd{\vb{k}} \exp(i\epsilon_{\vb{k}} t + i\vb{k}\vdot \qty(\vb{r}-\vb{r}_0)-\frac{(\vb{k}-\vb{k}_0)^2}{\qty(\Delta k)^2}  ) =\\&=  e^{i\vb{k}_0 \vdot \vb{r}}\int \dd{\vb{k}} \exp(\qty(\epsilon_{\vb{k}_0}  + \pdv{\epsilon}{k} \delta \vb{k})t + i\delta \vb{k} \vdot \qty(\vb{r}-\vb{r}_0)-\frac{(\delta \vb{k})^2}{\qty(\Delta k)^2}  ) =\\&= e^{-(\Delta k)^2 \qty(t\qty(\vb{r} - (\vb{r}_0 + \pdv{\epsilon}{k})))^2} e^{i\vb{k}_0 \vdot \vb{r}}
+\end{align}
+
+Group velocity is thus $\grad_{\vb{k}} \epsilon_{\vb{k}}$
+
+\begin{theorem}[Hellmann-Feynman theorem]
+	Let $\epsilon_\alpha = \ev{h_\alpha}{\psi_n(\alpha)}$ for some hermitian $h_\alpha$.
+	\begin{align}
+	\dv{\alpha} \epsilon_\alpha  &=  \mel{\dv{\alpha}\psi_n(\alpha)}{h_\alpha}{\psi_n(\alpha)} + \mel{\psi_n(\alpha)}{\dv{\alpha}h_\alpha}{\psi_n(\alpha)} + \mel{\psi_n(\alpha)}{h_\alpha}{\dv{\alpha}\psi_n(\alpha)} =\\&= \mel{\psi_n(\alpha)}{\dv{\alpha}h_\alpha}{\psi_n(\alpha)} + \epsilon_{\alpha}\qty[\braket{\psi_n(\alpha)}{\dv{\alpha}\psi_n(\alpha)}+\braket{\dv{\alpha}\psi_n(\alpha)}{\psi_n(\alpha)}] =\\&= \mel{\psi_n(\alpha)}{\dv{\alpha}h_\alpha}{\psi_n(\alpha)} + 2\epsilon_{\alpha}\underbrace{\dv{\alpha}\braket{\psi_n(\alpha)}{\psi_n(\alpha)}}_0 = \mel{\psi_n(\alpha)}{\dv{\alpha}h_\alpha}{\psi_n(\alpha)}
+	\end{align}
+\end{theorem}
+\begin{prop}[Rules of semiclassical approximation]
+	
+	\begin{enumerate}
+		\item Wave will move keeping same band index.
+		\item Position obeys 
+		\begin{align}
+		\expval{\vb{r}} \sim \pdv{\epsilon}{\vb{k}}
+		\end{align}
+		\item 
+		\begin{align}
+		\hbar \vb{k} = e-\vb{E} - \frac{e}{c} \dot{\vb{r}} \cross \vb{B}
+		\end{align}
+	\end{enumerate}
+\begin{proof}
+	Lets write Shr\"{o}dinger equation
+	\begin{align}
+	\qty\underbrace{(\frac{\hbar \vb{k}^2}{2m}-\frac{2i\hbar \vb{k} \vdot \vb{\grad}}{2m}+\frac{\hbar \laplacian}{2m}}_{H_{\vb{k}}} + V(\vb{r})) \mathcal{U}_{\alpha, \vb{k}}(\vb{r}) = \epsilon_{\alpha, \vb{k}}\mathcal{U}_{\alpha, \vb{k}}(\vb{r}) 
+	\end{align}
+	Since $\psi_{\alpha, \vb{k}}(\vb{r}) $ is a Bloch wave
+	\begin{align}
+	\qty(-\frac{\hbar \laplacian}{2m} + V(\vb{r})) \psi_{\alpha, \vb{k}}(\vb{r}) = \epsilon_{\alpha, \vb{k}}\psi_{\alpha, \vb{k}}(\vb{r}) 
+	\end{align}
+	\begin{align}
+	\epsilon_{\alpha, \vb{k}} = \epsilon_{\alpha, \vb{k}_0} \grad_{\vb{k}}\epsilon_{\alpha, \vb{k}_0} \delta \vb{k} + \frac{1}{2} \sum_{i,j} \delta \vb{k}_i \vdot \delta \vb{k}_j \pdv{\epsilon}{\vb{k}_i }{\vb{k}_j}
+	\end{align}
+	
+	\begin{align}
+	\epsilon_{\vb{k}} = \ev{H}{\psi_k} = \ev{H_{\vb{k}}}{\mathcal{U}_{\vb{k}}}
+	\end{align}
+	\begin{align}
+	\dv{\vb{k}}\epsilon_{\alpha, \vb{k}} = \dv{\vb{k}}\ev{H_{\vb{k}}}{\mathcal{U}_{\vb{k}}} =  \ev{\dv{\vb{k}}H_{\vb{k}}}{\mathcal{U}_{\vb{k}}} = \ev{\underbrace{e^{i\vb{k}\vdot \vb{r}}\qty(-i\hbar \grad -\vb{k} )e^{-i\vb{k}\vdot \vb{r}}}_m}{\psi_{\vb{k}}}= \ev{\frac{\vb{P}}{m}}{\psi^\alpha_{\vb{k}}} = \vb{v}_{\vb{k}}
+	\end{align}
+	Thus
+	\begin{align}
+	\pdv{H_{\vb{k}}}{k} = \frac{-i\hbar \grad -\vb{k}}{m}
+	\end{align}
+	
+	
+	
+	We also define effective mass tensor:
+	\begin{align}
+	\frac{1}{\hbar^2}  \pdv{\epsilon}{\vb{k}_i }{\vb{k}_j} = (M^*)_{ij} = 
+	\frac{1}{m} \delta_{ij}  - 
+	\sum_{\alpha'} \frac{\mel{\psi_{\alpha, \vb{k}}}{P_i}{\psi_{\alpha', \vb{k}}}\mel{\psi_{\alpha', \vb{k}}}{P_i}{\psi_{\alpha, \vb{k}}}}{\epsilon_{\alpha, \vb{k}}-\epsilon_{\alpha', \vb{k}}}
+	\end{align}
+	
+	Now assume we have a particle in a electric field. We ask what is the power dissipated with electric field:
+	\begin{align}
+	\hbar \pdv{\epsilon_{\vb{k}}}{\vb{k}}  \vdot \dot{\vb{k}} =\pdv{\epsilon_{\vb{k}}}{t} =P_{diss} = - e \vb{E} \vdot \vb{v}_{\vb{k}_0} = -e \vb{E} \vdot \pdv{\epsilon_{\vb{k}}}{\vb{k}}
+	\end{align}
+	Thus
+	\begin{align}
+	 \dot{\vb{k}} = -\frac{e}{\hbar} \vb{E} 
+	\end{align}
+\end{proof}
+\end{prop}
+
+\paragraph{Bloch osscilations}
+Assume 1D band structure of the form $\epsilon_{\vb{k}} = - 2w\cos(k)$. Since $\dot{\vb{k}} = -\frac{e}{\hbar} \vb{E} $:
+\begin{align}
+\vb{k} = -\frac{e}{\hbar}\vb{E} t
+\end{align}
+What will be the velocity?
+\begin{align}
+\vb{v}(t) = 2W \sin(\frac{e}{\hbar}E t)
+\end{align}
+Define characteristic $ \tau = \frac{2\pi \hbar}{eE} $:
+\begin{align}
+\vb{v}(t) = 2W \sin(\frac{2\pi t}{\tau})
+\end{align}
+
+This effect was actually observed in cold atoms.
