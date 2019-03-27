@@ -1,0 +1,113 @@
+\paragraph{Alternative derivation}
+Given PBC in 1D, 
+\begin{align}
+\psi(x+L) = \psi(x)
+\end{align}
+and Hamiltonian
+\begin{align}
+H = \frac{p^2}{2m} + V(x)
+\end{align}
+We can perceive it as a ring. Adding an Aharonov-Bohm magnetic flux $\Phi$ inside the ring, we create gauge field  (vector potential)
+\begin{align}
+\vb{A} = \frac{\Phi}{L} \vu{x}
+\end{align}
+The electromotive force, from Lenz's law
+\begin{align}
+ -\frac{1}{c}\dot{\Phi}  = \mathcal{E} = E\vdot L
+\end{align}
+Thus
+\begin{align}
+\dot{\vb{A}} = - cE \Rightarrow \vb{A} = -cEt
+\end{align}
+And we rewrite the Hamiltonian
+\begin{align}
+\vb{p} \to \vb{p} -\frac{e}{c}\vb{A}
+\end{align}
+\begin{align}
+H = \frac{\qty(\vb{p} -\frac{e}{c} \vb{A})^2}{2m} + V(x) = \frac{\qty(\vb{p} -eEt)^2}{2m} + V(x) 
+\end{align}
+Now we solve the Shr\"{o}dinger equation:
+\begin{align}
+\tilde{\psi}_k(t) = e^{-\frac{ieAx}{c\hbar}} \psi_k(x)
+\end{align}
+The boundary condition is not periodic anymore, and substituting flux quantum ($\Phi_0 = \frac{\hbar c}{2\pi e}$) we get:
+\begin{align}
+\tilde{\psi}_k(L) = e^{-\frac{ieAL}{c\hbar}} \tilde{\psi}_k(0)= e^{-\frac{i\Phi}{c\hbar}} \tilde{\psi}_k(0)= e^{-i 2\pi \qty(\frac{\Phi}{\Phi_0})} \tilde{\psi}_k(0)
+\end{align}
+From \cref{bloch} 
+\begin{align}
+\tilde{\psi}_k(x) = e^{ikx} \tilde{\mathcal{U}}_k(x)
+\end{align}
+\begin{align}
+e^{ikL} \tilde{\mathcal{U}}_k(0) = \tilde{\psi}_k(L) =  e^{-\frac{ieAL}{c\hbar}} \tilde{\psi}_k(0) = e^{ik\cdot 0} \tilde{\mathcal{U}}_k(0)e^{-\frac{ieAL}{c\hbar}}
+\end{align}
+\begin{align}
+e^{ikL} = e^{-\frac{ieAL}{c\hbar}}
+\end{align}
+\begin{align}
+e^{i\qty(kL+\frac{eAL}{c\hbar})} = 1 
+\end{align}
+, i.e., there is a shift in $k$ values
+\begin{align}
+k = \frac{2\pi n}{L} - \underbrace{\frac{eA}{c\hbar} }_{- \delta k}
+\end{align}
+We can verify that
+\begin{align}
+H(A) \psi_k(x) = H(A) e^{\frac{ieAx}{c\hbar}}   \tilde{\psi}_k(t) = e^{\frac{ieAx}{c\hbar}}  H_{A=0} \tilde{\psi}= \epsilon_k e^{\frac{ieAx}{c\hbar}}  \tilde{\psi}_k = \epsilon_k \psi_k  
+\end{align}
+\begin{align}
+H\tilde{\psi}_k = \qty(\frac{p^2}{2m} + V(x)) \tilde{\psi}_k
+\end{align}
+
+If we put, for example, half-quantum flux, we'll get $\delta k = \frac{1}{2} \frac{2\pi}{L}$ and thus ground state is degenerate.
+
+If there is electric field, $A=-cEt$,
+\begin{align}
+\hbar\delta \dot{ \vb{k}} = -e\vb{E}
+\end{align} 
+If $\vb{E}$ is small enough, such that particles can't change the band, we acquire Bloch oscillation.
+
+\begin{prop}[Semiclassical dynamics in presence of magnetic field]
+	\begin{align}
+	\hbar \dot{ \vb{k}} = e\vb{E} + \frac{e}{c} \qty(\vb{v}_{\vb{k}} \cross \vb{B})
+	\end{align}
+\end{prop}
+
+\subsection{Landau-Zener tunneling}
+\begin{align}
+i\hbar \psi_k^{\alpha'} = \sum_{\alpha} H_{\vb{k}}^{\alpha \alpha'} \psi_{\alpha}
+\end{align}
+We look at Hamiltonian which depends on time, and only on two bands near the crossing.
+
+We rewrite Hamiltonian as a set of time independent Hamiltonians at $\bar{t}$:
+\begin{align}
+H_{\bar{t}}^{ad} \psi_{\alpha}^{\bar{t}}(x) = \epsilon_{\alpha}(\bar{t}) \psi_{\alpha'}^{\bar{t}} (x)
+\end{align}
+\begin{theorem}[Adiabatic theorem]
+	A physical system remains in its instantaneous eigenstate if a given perturbation is acting on it slowly enough and if there is a gap between the eigenvalue and the rest of the Hamiltonian's spectrum.
+\end{theorem}
+
+\paragraph{Model}
+
+\begin{align}
+H = \alpha t \sigma_z + \Delta \sigma_x
+\end{align}
+The energies
+\begin{align}
+\epsilon^{ad}(\bar{t}) = \pm \sqrt{(\alpha \bar{t}) + \Delta^2}
+\end{align}
+Thus the gap is $2\Delta$ and there is  probability to tunnel between bands:
+\begin{align}
+P_{\mp} (t\to \infty) \sim e^{-\frac{\pi}{2} \frac{\Delta^2}{\alpha}}
+\end{align}
+which can be found by solving
+\begin{align}
+\begin{pmatrix}
+\dot{ \psi}_\uparrow\\
+\dot{ \psi}_\downarrow
+\end{pmatrix} = H(t)
+\begin{pmatrix}
+ \psi_\uparrow\\
+ \psi_\downarrow
+\end{pmatrix}
+\end{align}

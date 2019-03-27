@@ -2,7 +2,6 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{hyperref}
 \usepackage{gensymb}
 \usepackage{graphicx}
 \usepackage{svg}
@@ -18,6 +17,16 @@
 \usepackage{esint} % beatiful integrals
 \usepackage{physics}
 \usepackage{amsthm} % theorems
+\usepackage{natbib}
+
+
+\usepackage{varioref} % references to show page
+\usepackage[pagebackref]{hyperref}
+\usepackage{url}
+\usepackage[capitalise]{cleveref} 
+
+\newcommand{\yrcite}[1]{\citeyearpar{#1}}
+\renewcommand{\cite}[1]{\citep{#1}}
 
 \usepackage[T1]{fontenc}
 % Nicer default font (+ math font) than Computer Modern for most use cases
@@ -86,11 +95,6 @@
 %opening
 \title{118028 - Quantum Transport in Solids}
 \author{Assa Auerbach}
-% njc860@gmail.com
-% Amado 707
-% https://sites.google.com/site/njcrawfordacademic/
-% David Williams Probability with Martingales
-% Rick Derret Probability Theory and examples
 
 
 \parindent=0em
@@ -107,4 +111,5 @@
 \input{lect1.tex}
 \input{lect2.tex}
 \input{lect3.tex}
+\input{lect4.tex}
 \end{document}
