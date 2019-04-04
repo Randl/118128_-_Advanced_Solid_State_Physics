@@ -1,0 +1,131 @@
+Simplest Landau--Zener is
+\begin{align}
+H = \alpha t \sigma^z + \Delta \sigma^x
+\end{align}
+We can diagonalize Hamiltonian in each particular moment:
+\begin{align}
+H^{ad} (t) = \sqrt{(\alpha t)^2+\Delta t^2} \sigma^z
+\end{align}
+with diagonalizing transformation
+\begin{align}
+U^{ad} (t) = e^{\frac{1}{2} \theta(t) \sigma^y}
+\end{align}
+where $\theta(t) = \arctan(\frac{\alpha t}{\Delta})$.
+The evolution operator is
+\begin{align}
+U^\infty &= \mathcal{T} e^{-i \int_{-\infty}^{\infty} \dd{t'} H(t')} = \prod_{t' = -\infty}^\infty  e^{-i H(t') \dd{t'}} = \prod_{t' = -\infty}^\infty  U^{ad}(t') {U^{ad}}^\dagger(t') e^{-i H(t') \dd{t'}} U^{ad}(t) { U^{ad}}^\dagger(t') =\\&= \prod_{t' =-\infty}^\infty  U^{ad}(t') e^{-i \Delta E(t') \dd{t'} \sigma^z} { U^{ad}}^\dagger(t')
+\end{align}
+But 
+\begin{align}
+{ U^{ad}}^\dagger(t'+\dd{t})U^{ad}(t') = \qty({ U^{ad}}^\dagger(t') + \dv{U^\dagger}{t'}  \dd{t}) U^{ad}(t') \approx 1 + \frac{i}{2} \sigma^y \dot{\theta} \dd{t}= 1 + \frac{i}{2} \sigma^y  \qty(\frac{\alpha \Delta}{(\alpha t)^2+\Delta^2})\dd{t}
+\end{align}
+Substituting into the product and taking first order
+\begin{align}
+\mel{\uparrow}{U^\infty}{\downarrow} &= \sum_{t'} \exp(-i \int_{t'}^\infty \dd{t''} \sqrt{(\alpha t'')^2+\Delta t^2}) \frac{i}{2}  \qty(\frac{\alpha \Delta}{(\alpha t')^2+\Delta^2}) \exp(-i \int_{-\infty}^{t'} \dd{t''} \sqrt{(\alpha t'')^2+\Delta t^2}) + \order{\alpha^2} =\\&=
+\exp(-i \int_{-\infty}^\infty \dd{t''} \sqrt{(\alpha t'')^2+\Delta t^2})  \int \dd{t'} \frac{i}{2}  \qty(\frac{\alpha \Delta}{(\alpha t')^2+\Delta^2}) \exp(-2i \int_{-\infty}^{t'} \dd{t''} \sqrt{(\alpha t'')^2+\Delta t^2}) + \order{\alpha^2}
+\end{align}
+
+We can use saddle point approximation:
+\begin{align}
+\int_{-\infty}^c \dd{t} e^{i S(t)} p(t) \simeq e^{i S(\bar{t})} p(\bar{t}) \int \dd{\delta t} \exp( -\pdv[2]{S}{t} (\delta t) + \order{(\delta t)^2} )
+\end{align}
+where $\bar{t}$ is such that
+\begin{align}
+\eval{\pdv{S}{t}}_{t=\bar{t}}=0
+\end{align}
+However, the solution is complex. We can substitute it since our function is entire on complex plane and continue our function to the saddle point. (In $p$ we substitute $\Re{\tau} = 0$ since else it diverges):
+\begin{align}
+\mel{\uparrow}{U^\infty}{\downarrow} &\simeq  
+\exp(-i \int_{-\infty}^\infty \dd{t''} \sqrt{(\alpha t'')^2+\Delta t^2}) \frac{\alpha}{\Delta} \exp(-2\int_0^{\frac{\Delta}{\alpha}} \dd{\tau'} \sqrt{\Delta^2 - (\alpha \tau')^2}) \sim\\&\sim \exp(-2 \qty(\frac{\Delta}{\alpha})^2 \int_0^1 \dd{u} \sqrt{1-u^2}) = e^{-\frac{\pi}{4} \qty(\frac{\Delta}{\alpha})^2}
+\end{align}
+\paragraph{Electric field}
+\begin{align}
+\vb{E} = -\frac{1}{c}\dot{\vb{A}}  - \grad{\phi}
+\end{align}
+If $\dot{\vb{A}} =0 $ and $\phi(\vb{x}) = -\vb{x}\vdot \vb{E}$, we have
+\begin{align}
+H_E = \frac{p^2}{2m} + e\vb{E} \vdot \vb{x} + V(x)
+\end{align} 
+But this Hamiltonian diverges in $\pm \infty$. Instead we can choose $\Lambda = c\vb{E} \vdot \vb{x}t$ for gauge transform
+\begin{align}
+\vb{A}' = \vb{A} + \grad{\Lambda(\vb{x},t)}
+\end{align} 
+acquiring 
+\begin{align}
+\vb{A}' = -c\vb{E} t
+\end{align}
+\section{Boltzmann equation}
+In equilibrium
+\begin{align}
+f^{(0)}_{\vb{k}, \alpha} = \frac{1}{\exp(\frac{\epsilon_{\vb{k}}^\alpha-\mu}{T})+1} = n_{\vb{k}}
+\end{align}
+
+If we look at phase space, then our states are incompressible liquid in a phase space, i.e., total number of particles doesn't change:
+\begin{align}
+\dv{f_{\vb{k}}}{t}  = \pdv{f_{\vb{k}}}{t} + \pdv{f_{\vb{k}}}{\vb{k}} \vdot \dot{\vb{k}} + \pdv{f_{\vb{k}}}{\vb{r}} \vdot \dot{\vb{r}} = 0
+\end{align}
+However, in addition, in can get scattered:
+\begin{align}
+P_{\vb{k}, \vb{k}'} = 2\pi \abs{\mel{\psi_{k'}}{V}{\psi_{k}}}^2 \delta(\epsilon_{\vb{k}} - \epsilon_{\vb{k}'}-\omega)
+\end{align}
+Thus
+\begin{align}
+\dv{f_{\vb{k}}}{t}  = \pdv{f_{\vb{k}}}{t} + \pdv{f_{\vb{k}}}{\vb{k}} \vdot \dot{\vb{k}} + \pdv{f_{\vb{k}}}{\vb{r}} \vdot \dot{\vb{r}}  = -\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}}
+\end{align}
+
+If we had $f_{\vb{k}} \qty(\vb{k}, \vb{r}, t)$, we could calculate observables, such as charge density, current, heat current, magnetization:
+\begin{align}
+\rho(\vb{r}, t) &= \sum_{\vb{k}} f_{\vb{k}} (\vb{r},t)\\
+\vb{j}(\vb{r}, t) &= e\sum_{\vb{k}} f_{\vb{k}} (\vb{r},t) \vdot \vb{v}_{\vb{k}}\\
+\vb{j}_Q(\vb{r}, t) &= \sum_{\vb{k}} f_{\vb{k}} (\vb{r},t)(E_{\vb{k}} - e\mu) \vdot \vb{v}_{\vb{k}}\\
+m_z(\vb{r}, t) &= \sum_{\vb{k},s} f_{\vb{k}} (\vb{r},t) \qty(\frac{\hbar}{2} \cdot s)\\
+\end{align}
+
+Lets evaluate $\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}}$:
+\begin{align}
+-\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}} = \sum_{\vb{k'}} P_{\vb{k}' \leftarrow \vb{k}} f_{\vb{k}} (1- f_{\vb{k}'}) - P_{\vb{k} \leftarrow \vb{k}'} f_{\vb{k}'} (1- f_{\vb{k}}) 
+\end{align}
+In equilibrium
+\begin{align}
+f=f^0 &= \frac{1}{\exp(\beta(\epsilon_{\vb{k}} - \mu)) -1 }\\
+1-f=1-f^0 &= \frac{\exp(\beta(\epsilon_{\vb{k}} - \mu))}{\exp(\beta(\epsilon_{\vb{k}} - \mu)) -1 }= \exp(\beta(\epsilon_{\vb{k}} - \mu)) f^0\\
+\end{align}
+Then\begin{align}
+-\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}} = \sum_{\vb{k'}} P_{\vb{k}'\leftarrow \vb{k}} \exp(\beta(\epsilon_{\vb{k}} - \mu)) f^0_{\vb{k}}f^0_{\vb{k}'} - P_{\vb{k} \leftarrow \vb{k}'} \exp(\beta(\epsilon_{\vb{k}'} - \mu)) f^0_{\vb{k}}f^0_{\vb{k}'} 
+\end{align}
+
+But
+\begin{align}
+\frac{P_{\vb{k}'\leftarrow \vb{k}}}{P_{\vb{k} \leftarrow \vb{k}'}} = e^{-\beta(\epsilon_{\vb{k}'} - \epsilon_{\vb{k}})}
+\end{align}
+i.e., everything vanishes. But $P_{\vb{k}'\leftarrow \vb{k}}$ depends on thing breaking translational symmetry:  impurities, phonons, electron-electron interactions.
+
+\paragraph{Relaxation time approximation}
+For phonons we can approximate with
+\begin{align}
+-\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}} = \frac{f(\vb{k},\vb{r},t) - f^0(\vb{k})}{\tau}
+\end{align}
+where $\tau$ is relaxation time. The approximation makes sense since we are interested in first order approximation.
+\paragraph{Impurities approximation}
+\begin{align}
+P_{\vb{k}', \vb{k}} &= 2\pi \abs{\mel{\vb{k}}{V^{im}}{\vb{k}'}}^2 \delta(\epsilon_k - \epsilon_{k'})\\
+-\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}} &= \sum_{\vb{k}'} \qty\big[f_{\vb{k}}(1-f_{\vb{k}'}) -f_{\vb{k}'}(1-f_{\vb{k}}) ]\abs{V^{im}_{\vb{k},\vb{k}'}}^2 \delta\qty(\epsilon_{\vb{k}}-\epsilon_{\vb{k}'})
+\end{align}
+where
+\begin{align}
+V^{im} &= \sum_i \vartheta(\vb{r}-\vb{R}_i)\\
+V_{\vb{k}, \vb{k}'} &= \int \psi^* V^{im} \psi \dd{x} = \frac{1}{V} \sum_i e^{i\qty(\vb{k}-\vb{k}')\vb{R}_i}\vartheta
+\end{align}
+Then
+\begin{align}
+\expval{\abs{V^{im}_{\vb{k},\vb{k}'}}^2} = \expval{\sum_{i,j} e^{i(\vb{k}-\vb{k'})(\vb{r}_i\vb{R}_j)}\abs{V_{\vb{k}, \vb{k}'} }^2 } = \sum_{i} \delta_{ij} \abs{V_{\vb{k}, \vb{k}'} }^2 = N \vartheta_{\vb{k}, \vb{k}'}  
+\end{align}
+where $N$ is number of impurities.
+\begin{align}
+-\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}} &= \sum_{\vb{k}'} \qty\big[f_{\vb{k}}(1-f_{\vb{k}'}) -f_{\vb{k}'}(1-f_{\vb{k}}) ]\abs{V^{im}_{\vb{k},\vb{k}'}}^2 \delta\qty(\epsilon_{\vb{k}}-\epsilon_{\vb{k}'})
+\end{align}
+
+Thus
+\begin{align}
+ \pdv{f_{\vb{k}}}{t} + \pdv{f_{\vb{k}}}{\vb{k}} \vdot \dot{\vb{k}} + \pdv{f_{\vb{k}}}{\vb{r}} \vdot \dot{\vb{r}}  = -\qty(\pdv{f_{\vb{k}}}{t})_{\text{collisions}} = -\frac{f-f^0}{\tau}
+\end{align}
